@@ -1,1 +1,1 @@
-{"type":"View","props":{"width":1080,"height":1920},"compId":2,"child":[{"type":"Script","props":{"runtime":"View/Rule/Rule.ts"},"compId":3}],"loadList":[],"loadList3D":[]}
+{"type":"View","props":{"width":1080,"height":1920},"compId":2,"child":[{"type":"Script","props":{"runtime":"../../../../Laya/LayaAirIDE2_1_1_1/resources/app/out/vs/layaEditor/src/View/Rule/Rule.ts"},"compId":3}],"loadList":[],"loadList3D":[]}

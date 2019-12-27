@@ -1,6 +1,13 @@
 D .
 D GameCommon
+P 20AF06BB BG_Main.png
+P 40A6A72D Button_GameStart.png
+P C87412F0 Color_Empty.png
 P 3D93C496 Color_Gray.png
+P ECB20E18 Icon_Left.png
+P A37DA94E Icon_Right.png
+P 5DF2B8FB Sound_No.png
+P 5A5E997D Sound_Yes.png
 D Loading
 P 297A1E47 LoadingBar.png
 R 23A1D69C LoadingBG.jpg

@@ -14,6 +14,9 @@ export default class User extends Laya.Script
     public static nickName: string = "";
     public static gender:number = 0;
 
+    public static skinIndex:number = 0;
+    public static skinMax:number = 5;
+
     public static get IsLogin_CloudFlame()
     {
         return (User.code != "") || (User.token != "");
@@ -69,6 +72,7 @@ export default class User extends Laya.Script
         //         last : last
         //     })
     }
+
     public static SubMoney_CloudFlame(sub : number)
     {
         sub = Math.ceil(sub)
@@ -84,6 +88,7 @@ export default class User extends Laya.Script
         //         last : last
         //     })
     }
+
     public static GetMoney_CloudFlame()
     {
         return User._gameData.moneyNum;

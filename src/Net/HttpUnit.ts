@@ -18,7 +18,7 @@ export class requestData
 
 export default class HttpUnit 
 {
-    public static request(req : requestData) {
+    public static Request_CloudFlame(req : requestData) {
         if (req.url.indexOf("https://") > -1 ||
             req.url.indexOf("http://") > -1) {
             req.url = req.url;
@@ -57,7 +57,7 @@ export default class HttpUnit
             "Content-Type", "application/json",
             "state" , NetConfig.state,
             "gameid" ,NetConfig.gameid,
-            "sign" ,AesTools.encrypt(time),
+            "sign" ,AesTools.encrypt_CloudFlame(time),
         ]
         if(User.token)
         {
@@ -70,32 +70,32 @@ export default class HttpUnit
 
     //todo:这里添加你们和服务器相互的接口
 
-    public static login(onSuccess : Function,onFail : Function)
+    public static Login_CloudFlame(onSuccess : Function,onFail : Function)
     {
         var req = new requestData();
         req.url = NetConfig.Login;
         req.onSuccess = onSuccess;
         req.onFail = onFail;
-        HttpUnit.request(req);
+        HttpUnit.Request_CloudFlame(req);
     }
     
-    public static saveGameData(gameData : any,onSuccess : Function,onFail : Function)
+    public static SaveGameData_CloudFlame(gameData : any,onSuccess : Function,onFail : Function)
     {
         var req = new requestData();
         req.url = NetConfig.SaveGameData;
         req.data.gameData = gameData;
         req.onSuccess = onSuccess;
         req.onFail = onFail;
-        HttpUnit.request(req);
+        HttpUnit.Request_CloudFlame(req);
     }
     
-    public static getGameData(onSuccess : Function,onFail : Function)
+    public static GetGameData_CloudFlame(onSuccess : Function,onFail : Function)
     {
         var req = new requestData();
         req.url = NetConfig.GetUser;
         req.onSuccess = onSuccess;
         req.onFail = onFail;
-        HttpUnit.request(req);
+        HttpUnit.Request_CloudFlame(req);
     }
     
     /**
@@ -104,14 +104,14 @@ export default class HttpUnit
      * @static
      * @memberof HttpUnit
      */
-    public static GetIpBlock(onSuccess : Function,onFail : Function){
+    public static GetIpBlock_CloudFlame(onSuccess : Function,onFail : Function){
         if(-1 != NetConfig.gameid)
         {
             var req = new requestData();
             req.url = NetConfig.IpBlock;
             req.onSuccess = onSuccess;
             req.onFail = onFail;
-            HttpUnit.request(req);
+            HttpUnit.Request_CloudFlame(req);
         }
     }
 }

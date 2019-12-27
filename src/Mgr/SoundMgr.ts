@@ -8,31 +8,31 @@ export default class SoundMgr {
     private constructor() {
     }
 
-    public get Enabled()
+    public get Enabled_CloudFlame()
     {
-        return this._enabled;
+        return this.enabledSound;
     }
 
-    public set Enabled(e : boolean)
+    public set Enabled_CloudFlame(e : boolean)
     {
         if(!e)
         {
-            this.StopBGM();
+            this.StopBGM_CloudFlame();
         }
-        this._enabled = e;
+        this.enabledSound = e;
     }
 
-    protected _enabled : boolean = true;
+    protected enabledSound : boolean = true;
 
-    public GetSoundUrl(name: string) : string {
+    public GetSoundUrl_CloudFlame(name: string) : string {
         let url = SoundMgr.soundResPath + name + ".mp3";
         return url;
     }
 
-    public PlaySound(name: string): void {
-        if(!this._enabled)
+    public PlaySound_CloudFlame(name: string): void {
+        if(!this.enabledSound)
             return;
-        var url = this.GetSoundUrl(name);
+        var url = this.GetSoundUrl_CloudFlame(name);
         if (Laya.Browser.onMiniGame) {
             var sound = laya.utils.Pool.getItem(name);
             if (sound == null) {
@@ -49,10 +49,10 @@ export default class SoundMgr {
         }
     }
 
-    public PlayBGM(name): void{
-        if(!this._enabled)
+    public PlayBGM_CloudFlame(name): void{
+        if(!this.enabledSound)
             return;
-        let url = this.GetSoundUrl(name);
+        let url = this.GetSoundUrl_CloudFlame(name);
         if (Laya.Browser.onMiniGame) {
             if(!this.bgm)
             {
@@ -67,7 +67,7 @@ export default class SoundMgr {
         }
     }
 
-    public StopBGM(): void{
+    public StopBGM_CloudFlame(): void{
         if (Laya.Browser.onMiniGame) {
             if(this.bgm){
                 this.bgm.stop();

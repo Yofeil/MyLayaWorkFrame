@@ -35,7 +35,7 @@ export default class LoadingView extends Laya.Script
         }
     }    
 
-    public setProcess(process : number)
+    public SetProcess_CloudFlame(process : number)
     {
         if(process < 0 )
             process = 0;

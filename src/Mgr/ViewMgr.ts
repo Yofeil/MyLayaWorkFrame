@@ -6,8 +6,6 @@ export enum ViewDef
     None = "",
     TipsView = "View/TipsView.json",
     GameStart = "View/GameStart.json",
-    Rule = "View/Rule.json",
-    Setting = "View/Setting.json",
     Gaming = "View/Gaming.json",
     GameOver = "View/GameOver.json",
     //todo:添加你的界面
@@ -19,7 +17,7 @@ export default class ViewMgr
     public static readonly instance: ViewMgr = new ViewMgr();
     protected readonly _views : any = {};
 
-    public OpenView(viewType :ViewDef,data? : any,oncomplate? : Function): void 
+    public OpenView_CloudFlame(viewType :ViewDef,data? : any,oncomplate? : Function): void 
     {
         if(this._views[viewType])
         {  
@@ -31,7 +29,7 @@ export default class ViewMgr
                     const element = coms[index];
                     if(element._viewBase){
                         viewBase = element as ViewBase
-                        viewBase.OpenView(data);
+                        viewBase.OpenView_CloudFlame(data);
                         break;
                     }
                 }
@@ -56,7 +54,7 @@ export default class ViewMgr
                     if(element._viewBase){
                         viewBase = element as ViewBase;
                         element._viewDef = viewType;
-                        viewBase.OpenView(data);
+                        viewBase.OpenView_CloudFlame(data);
                         break;
                     }
                 }
@@ -68,7 +66,7 @@ export default class ViewMgr
         }));
     }
 
-    public CloseView(viewType :ViewDef) 
+    public CloseView_CloudFlame(viewType :ViewDef) 
     {
         var view : Laya.View = this._views[viewType];
         if(view)
@@ -90,7 +88,7 @@ export default class ViewMgr
         }
     }
 
-    public ShowView(viewType :ViewDef) 
+    public ShowView_CloudFlame(viewType :ViewDef) 
     {
         var view  = this._views[viewType];
         if(view)
@@ -108,7 +106,7 @@ export default class ViewMgr
         }
     }
 
-    public HideView(viewType :ViewDef) 
+    public HideView_CloudFlame(viewType :ViewDef) 
     {
         var view = this._views[viewType];
         if(view)
@@ -126,13 +124,13 @@ export default class ViewMgr
         }
     }
 
-    public GetView(viewType :ViewDef) : Laya.View
+    public GetView_CloudFlame(viewType :ViewDef) : Laya.View
     {
         return this._views[viewType];
     }
 
-    public ShowTips(msg : string)
+    public ShowTips_CloudFlame(msg : string)
     {
-        this.OpenView(ViewDef.TipsView,msg);
+        this.OpenView_CloudFlame(ViewDef.TipsView,msg);
     }
 }

@@ -14,19 +14,19 @@ export default class TipsView extends ViewBase
         this.tipsText = this.bg.getChildByName("Text") as Laya.Text;
     }
 
-    public OpenView(data?: any): void 
+    public OpenView_CloudFlame(data?: any): void 
     {
-        super.OpenView(data);
-        this.SetTipsMsg(data);
+        super.OpenView_CloudFlame(data);
+        this.SetTipsMsg_CloudFlame(data);
         Laya.timer.clearAll(this);
         var self = this;
         Laya.timer.once(3000,this,function()
         {   
-            self.CloseView();
+            self.CloseView_CloudFlame();
         })
     }
 
-    public SetTipsMsg(msg : string): void 
+    public SetTipsMsg_CloudFlame(msg : string): void 
     {
         this.tipsText.text = msg;
     }

@@ -17,59 +17,59 @@ export default class ViewBase extends Laya.Script
     }
 
     onEnable(): void {
-        this.AddEvent();
+        this.AddEvent_CloudFlame();
     }
 
     onDisable(): void {
-        this.RemoveEvent();
+        this.RemoveEvent_CloudFlame();
     }
 
     onDestroy(): void {
-        this.RemoveEvent();
+        this.RemoveEvent_CloudFlame();
     }
     
-    public OpenView(data?: any): void {
+    public OpenView_CloudFlame(data?: any): void {
         this.data = data;
-        this.Show()
+        this.Show_CloudFlame()
         if(this.onOpenEvent)
         {
             this.onOpenEvent();
         }
     }
 
-    public AddEvent() {
+    public AddEvent_CloudFlame() {
 
     }
 
-    public RemoveEvent() {
+    public RemoveEvent_CloudFlame() {
         Laya.timer.clearAll(this);
     }
 
-    public CloseView() 
+    public CloseView_CloudFlame() 
     {
-        ViewMgr.instance.CloseView(this.viewDef);
+        ViewMgr.instance.CloseView_CloudFlame(this.viewDef);
     }
 
-    public Hide()
+    public Hide_CloudFlame()
     {
         (this.owner as Laya.View).visible = false;
-        this.onHide();
+        this.onHide_CloudFlame();
     }
 
-    public Show()
+    public Show_CloudFlame()
     {
         (this.owner as Laya.View).visible = true;
-        this.onShow();
+        this.onShow_CloudFlame();
     }
 
-    public ViewIsHide()
+    public ViewIsHide_CloudFlame()
     {
         return (this.owner as Laya.View).alpha == 0;
     }
 
-    protected onHide(){}
-    protected onShow(){}
-    protected onClose()
+    protected onHide_CloudFlame(){}
+    protected onShow_CloudFlame(){}
+    protected onClose_CloudFlame()
     {
         Laya.timer.clearAll(this);
         Laya.Tween.clearAll(this);

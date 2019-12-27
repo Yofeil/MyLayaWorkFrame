@@ -56,7 +56,7 @@ class Main {
 		this.loadingUI.width = Laya.stage.width;
 		this.loadingUI.height = Laya.stage.height;
 		this.loadingView = this.loadingUI.getComponent(LoadingView);
-		this.loadingView.setProcess(0);
+		this.loadingView.SetProcess_CloudFlame(0);
 	}
 
 	//添加预加载的资源	
@@ -80,7 +80,7 @@ class Main {
 							self.LoadResComplate();//预加载完成
 						}), Laya.Handler.create(this, (res) => {
 							//todo:跟新进度条
-							self.loadingView.setProcess(res / 2 + 0.5);
+							self.loadingView.SetProcess_CloudFlame(res / 2 + 0.5);
 						}));
 					}
 					else
@@ -95,7 +95,7 @@ class Main {
 			});			
 			loadSubResTask.onProgressUpdate(res => 				
 			{
-				self.loadingView.setProcess(res / 2);
+				self.loadingView.SetProcess_CloudFlame(res / 2);
 			});
 		}
 		else{
@@ -103,7 +103,7 @@ class Main {
 				Laya.loader.load(resource, Laya.Handler.create(this, () => {
 					self.LoadResComplate();
 				}), Laya.Handler.create(this, (res) => {
-					self.loadingView.setProcess(res);
+					self.loadingView.SetProcess_CloudFlame(res);
 				}));
 			}
 			else {
@@ -114,7 +114,7 @@ class Main {
 
 	//加载资源完成
 	private LoadResComplate(): void{
-		this.loadingView.setProcess(1);
+		this.loadingView.SetProcess_CloudFlame(1);
 		this.UserLogin();
 		this.CloadLoadingUI();
 		console.log("---游戏加载完成---");
@@ -127,7 +127,7 @@ class Main {
 		{
 			WXAPI.wxLogin_CloudFlame(function (code) {
 				User.code = code
-				HttpUnit.login(
+				HttpUnit.Login_CloudFlame(
 				(res)=> 
 				{
 					if(res.code == 1)
@@ -136,7 +136,7 @@ class Main {
 						User.token = res.data.token;
 						User.openId = res.data.openid;
 						//ALD.aldSendOpenId(User.openId);
-						HttpUnit.getGameData((res)=>{
+						HttpUnit.GetGameData_CloudFlame((res)=>{
 							console.log("获取用户数据成功！！！");
 							if(1 == res.code)
 							{

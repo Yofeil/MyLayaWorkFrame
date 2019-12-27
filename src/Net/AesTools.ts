@@ -6,7 +6,7 @@ export default class AesTools
     private static readonly IV = 'J$f4DU%sNL73M&Go';
 
     //加密
-    public static encrypt(str: string) {
+    public static encrypt_CloudFlame(str: string) {
         var key = CryptoJS.enc.Utf8.parse(AesTools.KEY);// 秘钥
         var iv = CryptoJS.enc.Utf8.parse(AesTools.IV);//向量iv
         var encrypted = CryptoJS.AES.encrypt(str, key, { iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 });
@@ -14,7 +14,7 @@ export default class AesTools
     }
 
     //解密
-    public static decrypt(str: string) {
+    public static decrypt_CloudFlame(str: string) {
         var key = CryptoJS.enc.Utf8.parse(AesTools.KEY);// 秘钥
         var iv = CryptoJS.enc.Utf8.parse(AesTools.IV);//向量iv
         var decrypted = CryptoJS.AES.decrypt(str, key, { iv: iv, padding: CryptoJS.pad.Pkcs7 });
