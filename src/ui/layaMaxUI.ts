@@ -5,7 +5,7 @@ import Scene=Laya.Scene;
 var REG: Function = Laya.ClassUtils.regClass;
 export module ui.View {
     export class LoadingUI extends Scene {
-        public static  uiView:any ={"type":"Scene","props":{"width":1920,"height":1080},"compId":2,"child":[{"type":"Clip","props":{"skin":"Loading/LoadingBG.jpg","name":"Bg"},"compId":3,"child":[{"type":"Clip","props":{"width":1920,"skin":"Loading/LoadingBar.png","name":"processBar","left":0,"height":22,"bottom":98},"compId":4}]},{"type":"Script","props":{"y":0,"x":0,"runtime":"View/LoadingView.ts"},"compId":5}],"loadList":["Loading/LoadingBG.jpg","Loading/LoadingBar.png"],"loadList3D":[]};
+        public static  uiView:any ={"type":"Scene","props":{"width":1920,"height":1080},"compId":2,"child":[{"type":"Clip","props":{"skin":"Loading/LoadingBG.jpg","name":"Bg"},"compId":3,"child":[{"type":"Clip","props":{"width":1920,"skin":"Loading/LoadingBar.png","name":"processBar","left":0,"height":22,"bottom":98},"compId":4}]},{"type":"Script","props":{"runtime":"View/LoadingView/LoadingView.ts"},"compId":6}],"loadList":["Loading/LoadingBG.jpg","Loading/LoadingBar.png"],"loadList3D":[]};
         constructor(){ super()}
         createChildren():void {
             super.createChildren();

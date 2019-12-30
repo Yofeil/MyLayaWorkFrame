@@ -1,6 +1,7 @@
 
 export default class SoundMgr {
-    public static readonly soundResPath = "subRes/sound/"
+    
+    public static readonly strSoundResPath : string = "subRes/sound/";
     public static readonly instance: SoundMgr = new SoundMgr();
     
     private bgm:any;
@@ -25,7 +26,7 @@ export default class SoundMgr {
     protected enabledSound : boolean = true;
 
     public GetSoundUrl_CloudFlame(name: string) : string {
-        let url = SoundMgr.soundResPath + name + ".mp3";
+        let url = SoundMgr.strSoundResPath + name + ".mp3";
         return url;
     }
 
@@ -37,7 +38,7 @@ export default class SoundMgr {
             var sound = laya.utils.Pool.getItem(name);
             if (sound == null) {
                 sound = wx.createInnerAudioContext();
-                sound.src = SoundMgr.soundResPath + name + ".mp3";
+                sound.src = SoundMgr.strSoundResPath + name + ".mp3";
                 sound.onEnded(() => {
                     laya.utils.Pool.recover(name, sound);
                     sound.offEnded();

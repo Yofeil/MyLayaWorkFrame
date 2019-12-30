@@ -1,1 +1,1 @@
-{"type":"View","props":{"width":1080,"height":1920},"compId":2,"child":[{"type":"Script","props":{"runtime":"View/Gaming/Gaming.ts"},"compId":3}],"loadList":[],"loadList3D":[]}
+{"type":"View","props":{"width":1920,"height":1080},"compId":2,"child":[{"type":"Script","props":{"runtime":"View/Gaming/Gaming.ts"},"compId":3}],"loadList":[],"loadList3D":[]}

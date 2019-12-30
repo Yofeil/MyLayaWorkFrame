@@ -15,13 +15,13 @@ export enum ViewDef
 export default class ViewMgr 
 {
     public static readonly instance: ViewMgr = new ViewMgr();
-    protected readonly _views : any = {};
+    protected readonly views : any = {};
 
     public OpenView_CloudFlame(viewType :ViewDef,data? : any,oncomplate? : Function): void 
     {
-        if(this._views[viewType])
+        if(this.views[viewType])
         {  
-            var view = this._views[viewType];
+            var view = this.views[viewType];
             let coms = view._components;
             let viewBase : ViewBase = null;
             if(coms){
@@ -45,7 +45,7 @@ export default class ViewMgr
         Laya.Scene.load(viewUrl,Laya.Handler.create(this, function (owner: any) {
             Laya.stage.addChild(owner);
             var view = owner as Laya.View;
-            self._views[viewType] = view;
+            self.views[viewType] = view;
             let coms = owner._components;
             let viewBase : ViewBase = null;
             if(coms){
@@ -68,7 +68,7 @@ export default class ViewMgr
 
     public CloseView_CloudFlame(viewType :ViewDef) 
     {
-        var view : Laya.View = this._views[viewType];
+        var view : Laya.View = this.views[viewType];
         if(view)
         {
             var owner = view as any;
@@ -84,13 +84,13 @@ export default class ViewMgr
             }
             view.removeSelf();
             view.destroy();
-            this._views[viewType] = null;
+            this.views[viewType] = null;
         }
     }
 
     public ShowView_CloudFlame(viewType :ViewDef) 
     {
-        var view  = this._views[viewType];
+        var view  = this.views[viewType];
         if(view)
         {
             let coms = view._components;
@@ -108,7 +108,7 @@ export default class ViewMgr
 
     public HideView_CloudFlame(viewType :ViewDef) 
     {
-        var view = this._views[viewType];
+        var view = this.views[viewType];
         if(view)
         {
             let coms = view._components;
@@ -126,7 +126,7 @@ export default class ViewMgr
 
     public GetView_CloudFlame(viewType :ViewDef) : Laya.View
     {
-        return this._views[viewType];
+        return this.views[viewType];
     }
 
     public ShowTips_CloudFlame(msg : string)

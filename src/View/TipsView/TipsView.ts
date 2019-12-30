@@ -2,8 +2,8 @@ import ViewBase from "../ViewBase";
 
 export default class TipsView extends ViewBase
 {
-    protected bg : Laya.Sprite;
-    protected tipsText : Laya.Text;
+    protected bg : Laya.Sprite = null;
+    protected tipsText : Laya.Text = null;
 
     constructor() { super(); }
 

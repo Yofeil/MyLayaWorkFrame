@@ -1,4 +1,4 @@
-import ViewMgr, { ViewDef } from "../Mgr/ViewMgr";
+import viewMgr, { ViewDef } from "../Mgr/ViewMgr";
 
 //界面基类，所有功能模块界面继承于这个类。这种类型的界面不能嵌套。
 export default class ViewBase extends Laya.Script 
@@ -47,7 +47,7 @@ export default class ViewBase extends Laya.Script
 
     public CloseView_CloudFlame() 
     {
-        ViewMgr.instance.CloseView_CloudFlame(this.viewDef);
+        viewMgr.instance.CloseView_CloudFlame(this.viewDef);
     }
 
     public Hide_CloudFlame()

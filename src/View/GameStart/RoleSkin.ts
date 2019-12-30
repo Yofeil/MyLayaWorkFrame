@@ -3,11 +3,11 @@ export default class RoleSkin extends Laya.Script{
 
     }
 
-    private InitSkin(): void{
+    private InitSkin_CloudFlame(): void{
 
     }
 
-    public ChangeSkin(): void{
+    public ChangeSkin_CloudFlame(): void{
         
     }
 }

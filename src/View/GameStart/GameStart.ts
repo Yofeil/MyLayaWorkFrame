@@ -28,52 +28,52 @@ export default class GameStart extends ViewBase{
 
         this.roleSkin = this.role.getComponent(RoleSkin);
 
-        this.ShowSkinBtn();
-        this.ShowSettingBtn();
+        this.ShowSkinBtn_CloudFlame();
+        this.ShowSettingBtn_CloudFlame();
     }
 
     AddEvent_CloudFlame(){
-        this.settingBtn.on(Laya.Event.CLICK,this,this.OnSettingBtn);
-        this.startBtn.on(Laya.Event.CLICK,this,this.OnStartBtn);
-        this.leftBtn.on(Laya.Event.CLICK,this,this.OnSkinChangeBtn,[true]);
-        this.rightBtn.on(Laya.Event.CLICK,this,this.OnSkinChangeBtn,[false]);
+        this.settingBtn.on(Laya.Event.CLICK,this,this.OnSettingBtn_CloudFlame);
+        this.startBtn.on(Laya.Event.CLICK,this,this.OnStartBtn_CloudFlame);
+        this.leftBtn.on(Laya.Event.CLICK,this,this.OnSkinChangeBtn_CloudFlame,[true]);
+        this.rightBtn.on(Laya.Event.CLICK,this,this.OnSkinChangeBtn_CloudFlame,[false]);
     }
 
     RemoveEvent_CloudFlame(){
-        this.settingBtn.off(Laya.Event.CLICK,this,this.OnSettingBtn);
-        this.startBtn.off(Laya.Event.CLICK,this,this.OnStartBtn);
-        this.leftBtn.off(Laya.Event.CLICK,this,this.OnSkinChangeBtn);
-        this.rightBtn.off(Laya.Event.CLICK,this,this.OnSkinChangeBtn);
+        this.settingBtn.off(Laya.Event.CLICK,this,this.OnSettingBtn_CloudFlame);
+        this.startBtn.off(Laya.Event.CLICK,this,this.OnStartBtn_CloudFlame);
+        this.leftBtn.off(Laya.Event.CLICK,this,this.OnSkinChangeBtn_CloudFlame);
+        this.rightBtn.off(Laya.Event.CLICK,this,this.OnSkinChangeBtn_CloudFlame);
     }
 
-    private ShowSkinBtn(): void{
+    private ShowSkinBtn_CloudFlame(): void{
         this.leftBtn.visible = User.skinIndex > 0 ? true: false;
         this.rightBtn.visible = User.skinIndex < User.skinMax ? true: false;
 
     }
 
-    private ShowSettingBtn(): void{
+    private ShowSettingBtn_CloudFlame(): void{
         (this.settingBtn as Laya.Clip).skin = SoundMgr.instance.Enabled_CloudFlame ? "GameCommon/Sound_Yes.png" : "GameCommon/Sound_No.png";
     }
 
-    private OnSettingBtn(): void{
+    private OnSettingBtn_CloudFlame(): void{
         SoundMgr.instance.Enabled_CloudFlame = !SoundMgr.instance.Enabled_CloudFlame;
         if(SoundMgr.instance.Enabled_CloudFlame){
             SoundMgr.instance.PlayBGM_CloudFlame("bgm");
         }
-        this.ShowSettingBtn();
+        this.ShowSettingBtn_CloudFlame();
     }    
 
-    private OnStartBtn(): void{
+    private OnStartBtn_CloudFlame(): void{
         ViewMgr.instance.OpenView_CloudFlame(ViewDef.Gaming,null,()=>{
             ViewMgr.instance.CloseView_CloudFlame(ViewDef.GameStart);
         });
     }
 
-    private OnSkinChangeBtn(IsLeft: boolean): void{
+    private OnSkinChangeBtn_CloudFlame(IsLeft: boolean): void{
         User.skinIndex = IsLeft ? User.skinIndex - 1 : User.skinIndex + 1;
-        this.ShowSkinBtn();
-        this.roleSkin.ChangeSkin();
+        this.ShowSkinBtn_CloudFlame();
+        this.roleSkin.ChangeSkin_CloudFlame();
     }
     
 }

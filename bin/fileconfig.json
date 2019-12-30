@@ -1,1 +1,1 @@
-{"res/atlas/GameCommon.atlas":["GameCommon/",["BG_Main.png","Button_GameStart.png","Color_Empty.png","Color_Gray.png","Icon_Left.png","Icon_Right.png","Sound_No.png","Sound_Yes.png"]],"res/atlas/Loading.atlas":["Loading/",["LoadingBar.png"]]}
+{"res/atlas/GameCommon.atlas":["GameCommon/",["Button_GameStart.png","Color_Empty.png","Color_Gray.png","Icon_Back.png","Icon_Close.png","Icon_Left.png","Icon_Reset.png","Icon_Right.png","Sound_No.png","Sound_Yes.png","Word_GameOver.png","Word_Score.png"]],"res/atlas/Loading.atlas":["Loading/",["LoadingBar.png"]]}

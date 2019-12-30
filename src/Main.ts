@@ -1,15 +1,14 @@
 import GameConfig from "./GameConfig";
+import AppConfig from "./AppConfig";
 import User from "./User/User";
-import HttpUnit from "./Net/HttpUnit";
 import { ui } from "./ui/layaMaxUI";
-import LoadingView from "./View/LoadingView";
-import WXAPI from "./WXAPI";
-
+import LoadingView from "./View/LoadingView/LoadingView";
 class Main {
-	protected loadingUI : ui.View.LoadingUI = null;
-	protected loadingView : LoadingView = null;
+	protected loadingUI: ui.View.LoadingUI = null;;
+	protected loadingView: LoadingView = null;
+
 	//预加载列表
-	private readonly preLoadRes : Array<any> = new Array<any> ();
+	private readonly preLoadRes: Array<any> = new Array<any>();
 
 	constructor() {
 		//根据IDE设置初始化引擎		
@@ -40,19 +39,22 @@ class Main {
 	}
 
 	onConfigLoaded(): void {
-		//加载IDE指定的场景
-		//GameConfig.startScene && Laya.Scene.open(GameConfig.startScene);
+		// //加载IDE指定的场景
+		// GameConfig.startScene && Laya.Scene.open(GameConfig.startScene);
+		this.GameInitLoad_CloudFlame();
+	}
+
+	//游戏初始化加载
+	private GameInitLoad_CloudFlame(): void {
 		Laya.loader.maxLoader = 50;
-		this.InitLoadingView();
-		//加载资源
-		this.LoadRes();
-		
+		this.InitLoadingView_CloudFlame();
+		this.LoadRes_CloudFlame();
 	}
 
 	//初始化加载界面
-	private InitLoadingView(): void{
-		this.loadingUI = new ui.View.LoadingUI();		
-		Laya.stage.addChild(this.loadingUI);		
+	private InitLoadingView_CloudFlame(): void {
+		this.loadingUI = new ui.View.LoadingUI();
+		Laya.stage.addChild(this.loadingUI);
 		this.loadingUI.width = Laya.stage.width;
 		this.loadingUI.height = Laya.stage.height;
 		this.loadingView = this.loadingUI.getComponent(LoadingView);
@@ -60,136 +62,55 @@ class Main {
 	}
 
 	//添加预加载的资源	
-	private PreLoadRes(): void{
-		//this._preLoadRes.push({ url: AppConfig.ResServer + "/json/example.json", type: Laya.Loader.JSON });		
+	private PreLoadRes_CloudFlame(): void {
+		this.preLoadRes.push({ url:"res/atlas/GameCommon.atlas", type: Laya.Loader.ATLAS });		
+		this.preLoadRes.push({ url:"GameCommon/BG_Main.png", type: Laya.Loader.IMAGE });		
+		this.preLoadRes.push({ url:"GameCommon/BG_Pop.png", type: Laya.Loader.IMAGE });		
 	}
 
 	//加载资源
-	private LoadRes(): void{
-		this.PreLoadRes();
+	private LoadRes_CloudFlame(): void {
+		this.PreLoadRes_CloudFlame();
 		var resource: Array<any> = this.preLoadRes;
 		var self = this;
-		if(Laya.Browser.onMiniGame){
-			var loadSubResTask: any = Laya.Browser.window["wx"].loadSubpackage({
-				name: 'subRes',
-				success: (res) => {
-					// 分包加载成功,开始预加载资源
-					if(resource.length > 0)
-					{
-						Laya.loader.load(resource, Laya.Handler.create(this, () => {
-							self.LoadResComplate();//预加载完成
-						}), Laya.Handler.create(this, (res) => {
-							//todo:跟新进度条
-							self.loadingView.SetProcess_CloudFlame(res / 2 + 0.5);
-						}));
-					}
-					else
-					{
-						self.LoadResComplate();//预加载完成
-					}
-				},
-				fail: (res) => 
-				{
-					this.LoadRes();//加载失败，重新加载
-				}
-			});			
-			loadSubResTask.onProgressUpdate(res => 				
-			{
-				self.loadingView.SetProcess_CloudFlame(res / 2);
-			});
-		}
-		else{
+
+		if (!Laya.Browser.onMiniGame) //本地或网页加载策略
+		{
 			if (resource.length > 0) {
 				Laya.loader.load(resource, Laya.Handler.create(this, () => {
-					self.LoadResComplate();
+					self.LoadResComplate_CloudFlame();
 				}), Laya.Handler.create(this, (res) => {
 					self.loadingView.SetProcess_CloudFlame(res);
 				}));
 			}
 			else {
-				self.LoadResComplate();
+				self.LoadResComplate_CloudFlame();
 			}
 		}
 	}
 
 	//加载资源完成
-	private LoadResComplate(): void{
+	private LoadResComplate_CloudFlame(): void {
 		this.loadingView.SetProcess_CloudFlame(1);
-		this.UserLogin();
-		this.CloadLoadingUI();
-		console.log("---游戏加载完成---");
+		this.UserLogin_CloudFlame();
+		this.CloadLoadingUI_CloudFlame();
+		console.log("---游戏加载初始化完成---");
 	}
 
 	//用户登录
-	private  UserLogin(): void{
+	private UserLogin_CloudFlame(): void {
 		var self = this;
-		if(Laya.Browser.onMiniGame)
+		if (!Laya.Browser.onMiniGame) //本地或网页登录
 		{
-			WXAPI.wxLogin_CloudFlame(function (code) {
-				User.code = code
-				HttpUnit.Login_CloudFlame(
-				(res)=> 
-				{
-					if(res.code == 1)
-					{
-						console.log("登陆成功！！！");
-						User.token = res.data.token;
-						User.openId = res.data.openid;
-						//ALD.aldSendOpenId(User.openId);
-						HttpUnit.GetGameData_CloudFlame((res)=>{
-							console.log("获取用户数据成功！！！");
-							if(1 == res.code)
-							{
-								User.InitiUser_CloudFlame(res.data);
-							}
-							else
-							{
-								User.InitiUser_CloudFlame(null);
-							}
-							GameConfig.startScene && Laya.Scene.open(GameConfig.startScene, false, Laya.Handler.create(this, function () {
-								
-							}));
-						},(res)=>{
-							console.log("获取用户数据失败！！！");
-							User.token = "";
-							User.openId = "";
-							User.InitiUser_CloudFlame(null);
-							GameConfig.startScene && Laya.Scene.open(GameConfig.startScene, false, Laya.Handler.create(this, function () {
-								
-							}));
-						})
-					}
-					else
-					{
-						console.log("登陆失败！！！" + res);
-						User.InitiUser_CloudFlame(null);
-						GameConfig.startScene && Laya.Scene.open(GameConfig.startScene, false, Laya.Handler.create(this, function () {
-							
-						}));
-					}
-				},
-				(res) => 
-				{
-					console.log("登陆失败！！！" + res);
-					User.InitiUser_CloudFlame(null);
-					GameConfig.startScene && Laya.Scene.open(GameConfig.startScene, false, Laya.Handler.create(this, function () {
-						
-					}));
-				})
-			}, null)
-		}		
-		else
-		{
-			User.TestInitUser_CloudFlame();//测试
-			GameConfig.startScene && Laya.Scene.open(GameConfig.startScene, false, Laya.Handler.create(this, function () {				
+			User.TestInitUser_CloudFlame();
+			GameConfig.startScene && Laya.Scene.open(AppConfig.startScene, false, Laya.Handler.create(this, function () {
 			}));
 		}
 	}
 
 	//关闭加载界面
-	protected CloadLoadingUI(): void{
-		if(this.loadingUI && !this.loadingUI.destroyed)
-		{
+	protected CloadLoadingUI_CloudFlame(): void {
+		if (this.loadingUI && !this.loadingUI.destroyed) {
 			this.loadingUI.destroy();
 		}
 	}
